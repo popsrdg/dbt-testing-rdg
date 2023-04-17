@@ -1,3 +1,9 @@
+
+
+-- needed to allow dbt to connect
+create NETWORK POLICY IDENTIFIER('"DBT"') ALLOWED_IP_LIST = ( '52.45.144.63' , '54.81.134.249' , '52.22.161.231' ) COMMENT = '';
+
+
 USE ROLE ACCOUNTADMIN;
 
 /*
@@ -5,6 +11,7 @@ drop database rdg_sandbox;
 drop user RDG_LOAD_USER;
 drop role rdg_see_all;
 */
+
 
 create DATABASE IDENTIFIER('RDG_SANDBOX') COMMENT = '';
 create SCHEMA IDENTIFIER('RDG_SANDBOX.STAGE_01') COMMENT = '';
@@ -33,10 +40,6 @@ create USER IDENTIFIER('RDG_LOAD_USER')
     DEFAULT_ROLE = 'rdg_see_all'
 ;
 
-
-
--- needed to allow dbt to connect
-create NETWORK POLICY IDENTIFIER('"DBT"') ALLOWED_IP_LIST = ( '52.45.144.63' , '54.81.134.249' , '52.22.161.231' ) COMMENT = '';
 
 
 
