@@ -19,6 +19,7 @@ create DATABASE IDENTIFIER('RDG_SANDBOX') COMMENT = '';
 -- create role and assign to users
 create role rdg_see_all;
 --GRANT ROLE rdg_see_all TO ROLE sysadmin;
+GRANT ROLE IDENTIFIER('rdg_see_all') TO USER IDENTIFIER('rdg_load_user');
 GRANT ROLE IDENTIFIER('rdg_see_all') TO USER IDENTIFIER('papag');
 GRANT ROLE IDENTIFIER('rdg_see_all') TO USER IDENTIFIER('kumar');
 
@@ -26,12 +27,19 @@ GRANT ROLE IDENTIFIER('rdg_see_all') TO USER IDENTIFIER('kumar');
 -- add privileges to role
 GRANT ALL PRIVILEGES ON DATABASE RDG_SANDBOX TO ROLE rdg_see_all;
 GRANT ALL PRIVILEGES ON FUTURE SCHEMAS IN DATABASE RDG_SANDBOX TO ROLE rdg_see_all;
+--GRANT ALL PRIVILEGES ON ALL SCHEMAS IN DATABASE RDG_SANDBOX TO ROLE rdg_see_all;
 GRANT ALL PRIVILEGES ON FUTURE TABLES IN DATABASE RDG_SANDBOX TO ROLE rdg_see_all;
---GRANT ALL PRIVILEGES ON FUTURE TABLES IN SCHEMA RDG_SANDBOX.xyz_schema TO ROLE rdg_see_all;
+--GRANT ALL PRIVILEGES ON ALL TABLES IN DATABASE RDG_SANDBOX TO ROLE rdg_see_all;
 GRANT OPERATE ON WAREHOUSE compute_wh TO ROLE rdg_see_all;
 --GRANT USAGE ON DATABASE rdg_sandbox TO ROLE rdg_see_all;
 --GRANT USAGE ON future SCHEMAS IN DATABASE rdg_sandbox TO ROLE rdg_see_all;
 --GRANT SELECT,INSERT,UPDATE,DELETE ON future TABLES IN DATABASE rdg_sandbox TO ROLE rdg_see_all;
+
+
+GRANT MONITOR ON ACCOUNT TO ROLE IDENTIFIER('"RDG_SEE_ALL"') WITH GRANT OPTION;
+GRANT EXECUTE TASK ON ACCOUNT TO ROLE IDENTIFIER('"RDG_SEE_ALL"') WITH GRANT OPTION;
+
+
 
 ---------------------------------------------------------------
 -- create schemas
@@ -55,7 +63,7 @@ create USER IDENTIFIER('RDG_LOAD_USER')
 
 ---------------------------------------------------------------
 -- create test table and then confirm role above has access
-create or replace table rdg_sandbox.stage_01.testa AS
+create or replace table rdg_sandbox.stage_01.testb AS
     select
     ROW_NUMBER() OVER(ORDER BY 1 desc) AS gen_id_v1
     ,1000 + ROW_NUMBER() OVER(ORDER BY 1 desc) AS gen_id_v2
