@@ -1,0 +1,109 @@
+# This file defines the data models for the SAP source system.
+
+version: 2
+
+sources:
+  - name: sap
+    schema: sap
+    database: my_sap_db
+    tables:
+      - name: vbak
+        description: |
+          The Sales Document Header Data table contains information about sales documents in the SAP system.
+          See the docblock for more information on the table fields.
+        columns:
+          - name: mandt
+            description: The client.
+            tests:
+              - not_null
+          - name: vbeln
+            description: The sales document.
+            tests:
+              - not_null
+          - name: vkorg
+            description: The sales organization.
+          - name: vtweg
+            description: The distribution channel.
+          - name: spart
+            description: The division.
+          - name: auart
+            description: The order type.
+          - name: kalsm
+            description: The sales and distribution calendar for shipping.
+          - name: audat
+            description: The order date.
+            tests:
+              - not_null
+          - name: kunnr
+            description: The sold-to party.
+            tests:
+              - not_null
+          - name: bstnk
+            description: The customer purchase order number.
+          - name: bstdk
+            description: The customer purchase order date.
+          - name: bsark
+            description: The order reason.
+          - name: ktext
+            description: The text for the order reason.
+          - name: bname
+            description: The name of the person who created the object.
+          - name: erdat
+            description: The created on date.
+            tests:
+              - not_null
+          - name: erzet
+            description: The entry time.
+            tests:
+              - not_null
+          - name: ernam
+            description: The name of person who created the object.
+          - name: aedat
+            description: The last changed on date.
+          - name: aenam
+            description: The name of person who changed object.
+          - name: vkbur
+            description: The sales office.
+          - name: vkgrp
+            description: The sales group.
+          - name: vkbur_text
+            description: The sales office description.
+          - name: vkgrp_text
+            description: The sales group description.
+          - name: spart_text
+            description: The division description.
+          - name: auart_text
+            description: The order type description.
+
+      - name: vbap
+        description: |
+          The Sales Document Item Data table contains information about the items in sales documents in the SAP system.
+          See the docblock for more information on the table fields.
+        columns:
+          - name: mandt
+            description: The client.
+            tests:
+              - not_null
+          - name: vbeln
+            description: The sales document.
+            tests:
+              - not_null
+          - name: posnr
+            description: The item number.
+            tests:
+              - not_null
+          - name: matnr
+            description: The material number.
+          - name: werks
+            description: The plant.
+          - name: lgort
+            description: The storage location.
+          - name: kwmeng
+            description: The order quantity.
+          - name: vrkme
+            description: The sales unit.
+          - name: netpr
+            description: The net price of the item.
+          - name: waerk
+            description:
+

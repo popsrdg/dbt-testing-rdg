@@ -1,0 +1,13 @@
+# sources.yml
+version: 2
+
+sources:
+  - name: a
+    tables:
+      - name: a
+        schema: my_external_schema
+
+  - name: b
+    tables:
+      - name: b
+        schema: my_external_schema
